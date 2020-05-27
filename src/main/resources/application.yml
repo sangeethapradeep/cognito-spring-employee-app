@@ -1,0 +1,13 @@
+server:
+  port: 8082
+  servlet:
+    context-path: /api/v1/employee
+security:
+  oauth2:
+    resource:
+      userInfoUri: https://<domain>.auth.<region>.amazoncognito.com/oauth2/userInfo
+      tokenInfoUri: https://<domain>.auth.<region>.amazoncognito.com/oauth2/token
+      jwk:
+        key-set-uri: https://cognito-idp.<region>.amazonaws.com/<cognito-user-pool-id>/.well-known/jwks.json
+    client:
+      clientId: <app-client-id>
