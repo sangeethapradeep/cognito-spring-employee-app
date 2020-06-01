@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +26,15 @@ public class AttendanceController {
     GeneralResponse<AttendanceDto> response =
         new GeneralResponse<>(attendanceService.getDetails(empId));
     return ResponseEntity.ok(response);
+  }
+
+  @PostMapping("/{id}")
+  public ResponseEntity<GeneralResponse<AttendanceDto>> createEmployee(
+          @PathVariable(name = "id") String empId) {
+
+    AttendanceDto attendance = attendanceService.getDetails("I001");
+
+    attendanceService.putDetails(attendance, empId);
+    return ResponseEntity.ok(new GeneralResponse<>());
   }
 }

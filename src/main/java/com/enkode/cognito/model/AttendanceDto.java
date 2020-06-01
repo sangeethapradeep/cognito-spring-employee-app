@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @JsonInclude(Include.NON_NULL)
 public class AttendanceDto {
 

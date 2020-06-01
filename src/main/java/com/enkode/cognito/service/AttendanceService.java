@@ -2,6 +2,7 @@ package com.enkode.cognito.service;
 
 import com.enkode.cognito.exception.RequestException;
 import com.enkode.cognito.model.AttendanceDto;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -10,25 +11,25 @@ import org.springframework.stereotype.Service;
 @Service
 public class AttendanceService {
 
-  private List<AttendanceDto> attendances =
-      Arrays.asList(
+  private List<AttendanceDto> attendances = new ArrayList<>(Arrays.asList(
           AttendanceDto.builder()
-              .id("I001")
-              .totalNoOfWorkingDays("230 days")
-              .currentFiscalYear("2019-2020")
-              .noOfAttendedDays("210 days")
-              .noOfCasualLeavesTaken("7 days")
-              .noOfSickLeavesTaken("7 days")
-              .noOfUnPaidLeavesTaken("6 days")
-              .build(),
-          AttendanceDto.builder()
-              .id("I002")
-              .totalNoOfWorkingDays("230 days")
-              .currentFiscalYear("2019-2020")
-              .noOfAttendedDays("220 days")
-              .noOfCasualLeavesTaken("4 days")
-              .noOfSickLeavesTaken("6 days")
-              .build());
+                  .id("I001")
+                  .totalNoOfWorkingDays("230 days")
+                  .currentFiscalYear("2019-2020")
+                  .noOfAttendedDays("210 days")
+                  .noOfCasualLeavesTaken("7 days")
+                  .noOfSickLeavesTaken("7 days")
+                  .noOfUnPaidLeavesTaken("6 days")
+                  .build()
+//          AttendanceDto.builder()
+//                  .id("I002")
+//                  .totalNoOfWorkingDays("230 days")
+//                  .currentFiscalYear("2019-2020")
+//                  .noOfAttendedDays("220 days")
+//                  .noOfCasualLeavesTaken("4 days")
+//                  .noOfSickLeavesTaken("6 days")
+//                  .build()
+  ));
 
   public AttendanceDto getDetails(String employee) {
     Optional<AttendanceDto> employeeAttendance =
@@ -41,5 +42,11 @@ public class AttendanceService {
     }
 
     return employeeAttendance.get();
+  }
+
+  public void putDetails(AttendanceDto attendance, String employee) {
+    attendance = attendance.toBuilder().id(employee).build();
+
+    attendances.add(attendance);
   }
 }
